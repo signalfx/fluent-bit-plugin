@@ -1,0 +1,10 @@
+{"time": "09/Sep/2019:16:14:41 +0200", "log": "balsam", "ecs_cluster": "A", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:42 +0200", "log": "error", "ecs_cluster": "A", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:43 +0200", "log": "exception", "ecs_cluster": "B", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:44 +0200", "log": "1 error exception", "ecs_cluster": "B", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:45 +0200", "log": "foo bar", "ecs_cluster": "C", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:46 +0200", "log": "federal ates", "ecs_cluster": "A", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:47 +0200", "log": "jungle", "ecs_cluster": "A", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:48 +0200", "log": "circumference", "ecs_cluster": "A", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:49 +0200", "log": "giggle dom kingdom", "ecs_cluster": "A", "container_name": "/ecs-container-a1b2c3"}
+{"time": "09/Sep/2019:16:14:50 +0200", "log": "chromosome yields", "ecs_cluster": "A", "container_name": "/ecs-container-a1b2c3"}
