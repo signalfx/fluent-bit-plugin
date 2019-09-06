@@ -1,0 +1,5 @@
+.idea
+dist
+
+examples/fluent-bit-sample-big.log
+signalfx-fluent-bit-plugin
