@@ -85,6 +85,7 @@ func TestMetricsReporter(t *testing.T) {
 			Convey("shall log record", func() {
 				reporter.config.DebugLogEnabled = true
 				logger.On("Debug", "Processing record:").Return(nil)
+				logger.On("Debugf", "\tmetric: %s", mock.AnythingOfType("string")).Return(nil)
 				logger.On("Debugf", "\ttime: %s", mock.AnythingOfType("time.Time")).Return(nil)
 				logger.On("Debugf", "\t%s: %s", "MetricName", "record.metric").Return(nil)
 				logger.On("Debugf", "\t%s: %s", "cluster", "record.cluster").Return(nil)

@@ -15,7 +15,7 @@ func TestConfig(t *testing.T) {
 		config := Config{
 			Id:            "abc",
 			IngestURL:     "http://a.b.c",
-			Token:         "abc123",
+			Token:         "1234567890",
 			MetricName:    "com.example.abc",
 			MetricType:    datapoint.Gauge,
 			Dimensions:    []string{"foo", "bar"},
@@ -28,7 +28,7 @@ func TestConfig(t *testing.T) {
 			So(config.String(), ShouldEqual, `SignalFx output plugin configuration:
 Id            = abc
 Ingest URL    = http://a.b.c
-Token         = ab...23
+Token         = 12...90
 Metric Name   = com.example.abc
 Metric Type   = gauge
 Dimensions    = foo, bar
@@ -36,6 +36,11 @@ BufferSize    = 2000
 ReportingRate = 1m0s
 LogLevel      = warn
 `)
+		})
+
+		Convey("shall indicate invalid token", func() {
+			config.Token = "too-short"
+			So(config.String(), ShouldContainSubstring, "Token         = <invalid token>")
 		})
 	})
 }

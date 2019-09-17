@@ -15,7 +15,7 @@ func TestFactory(t *testing.T) {
 		rawConfig := map[string]string{
 			"Id":            "abc",
 			"IngestURL":     "http://a.b.c",
-			"Token":         "def",
+			"Token":         "1234567890",
 			"MetricName":    "com.example.abc",
 			"MetricType":    "gauge",
 			"Dimensions":    "foo, bar, baz",
@@ -36,7 +36,7 @@ func TestFactory(t *testing.T) {
 			config := NewFactory(valueGetter).GetConfig()
 			So(config.Id, ShouldEqual, "abc")
 			So(config.IngestURL, ShouldEqual, "http://a.b.c")
-			So(config.Token, ShouldEqual, "def")
+			So(config.Token, ShouldEqual, "1234567890")
 			So(config.MetricName, ShouldEqual, "com.example.abc")
 			So(config.MetricType, ShouldEqual, datapoint.Gauge)
 			So(config.Dimensions, ShouldResemble, []string{"foo", "bar", "baz"})
@@ -80,6 +80,11 @@ func TestFactory(t *testing.T) {
 			delete(rawConfig, "Dimensions")
 			config := NewFactory(valueGetter).GetConfig()
 			So(config.Dimensions, ShouldResemble, []string{})
+		})
+
+		Convey("shall panic when token is not valid", func() {
+			rawConfig["Token"] = ""
+			So(func() { NewFactory(valueGetter).GetConfig() }, ShouldPanicWith, "Invalid value for \"Token\": value shall be at least 10 characters long")
 		})
 
 		Convey("shall panic when metric type is invalid", func() {

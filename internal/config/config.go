@@ -30,7 +30,7 @@ func (c Config) String() string {
 	addLine("SignalFx output plugin configuration:")
 	addLine("Id            = %s", c.Id)
 	addLine("Ingest URL    = %s", c.IngestURL)
-	addLine("Token         = %s...%s", c.Token[0:2], c.Token[len(c.Token)-2:])
+	addLine("Token         = %s", obfuscatedToken(c.Token))
 	addLine("Metric Name   = %s", util.ValueOrDefault(c.MetricName, "<no default value>"))
 	addLine("Metric Type   = %s", util.MetricTypeAsString(c.MetricType))
 	addLine("Dimensions    = %s", strings.Join(c.Dimensions, ", "))
@@ -39,4 +39,11 @@ func (c Config) String() string {
 	addLine("LogLevel      = %s", c.LogLevel)
 
 	return builder.String()
+}
+
+func obfuscatedToken(token string) string {
+	if len(token) < minTokenLength {
+		return "<invalid token>"
+	}
+	return fmt.Sprintf("%s...%s", token[0:2], token[len(token)-2:])
 }

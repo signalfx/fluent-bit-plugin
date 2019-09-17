@@ -43,7 +43,7 @@ func (r *MetricsReporter) AddMetric(ts interface{}, record map[interface{}]inter
 	dp := datapoint.New(metric, dimensions, oneAsIntValue, metricType, timestamp)
 
 	if r.config.DebugLogEnabled {
-		r.printRecord(timestamp, record)
+		r.printRecord(metric, timestamp, record)
 	}
 
 	r.mutex.Lock()
@@ -77,8 +77,9 @@ func (r *MetricsReporter) getDimensions(record map[interface{}]interface{}) map[
 	return result
 }
 
-func (r *MetricsReporter) printRecord(t time.Time, record map[interface{}]interface{}) {
+func (r *MetricsReporter) printRecord(metric string, t time.Time, record map[interface{}]interface{}) {
 	r.logger.Debug("Processing record:")
+	r.logger.Debugf("\tmetric: %s", metric)
 	r.logger.Debugf("\ttime: %s", t)
 
 	for k, v := range record {

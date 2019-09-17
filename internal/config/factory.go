@@ -17,6 +17,7 @@ const defaultBufferSize = "10000"
 const defaultReportingRate = "5s"
 const defaultLogLevel = "info"
 
+const minTokenLength = 10 // SFx Access Tokens are 22 chars long in 2019 but accept 10 or more chars just in case
 const minBufferSize = 100
 const minReportingRate = time.Second
 
@@ -41,7 +42,7 @@ func (f *Factory) GetConfig() Config {
 	return Config{
 		Id:              util.ValueOrDefault(f.configValue("Id"), defaultPluginId),
 		IngestURL:       util.ValueOrDefault(f.configValue("IngestURL"), defaultIngestURL),
-		Token:           f.configValue("Token"),
+		Token:           f.configValueAsToken("Token"),
 		MetricName:      f.configValue("MetricName"),
 		MetricType:      f.configValueOrDefaultAsMetricType("MetricType", defaultMetricType),
 		Dimensions:      f.configValueAsSliceOfStrings("Dimensions", ","),
@@ -50,6 +51,14 @@ func (f *Factory) GetConfig() Config {
 		LogLevel:        logLevel,
 		DebugLogEnabled: logLevel == zapcore.DebugLevel,
 	}
+}
+
+func (f *Factory) configValueAsToken(configKey string) string {
+	token := f.configValue(configKey)
+	if len(token) < minTokenLength {
+		f.logger.Panicf("Invalid value for %q: value shall be at least %d characters long", configKey, minTokenLength)
+	}
+	return token
 }
 
 func (f *Factory) configValueOrDefaultAsMetricType(configKey string, defaultValue string) datapoint.MetricType {
