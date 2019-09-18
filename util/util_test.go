@@ -2,7 +2,6 @@ package util
 
 import (
 	"github.com/fluent/fluent-bit-go/output"
-	"github.com/signalfx/golib/datapoint"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 	"time"
@@ -56,24 +55,4 @@ func TestUtils(t *testing.T) {
 			So(FLBTimestampAsTime(struct{ unknown int }{1}), ShouldHappenOnOrAfter, t)
 		})
 	})
-
-	Convey("MetricTypeAsString", t, func() {
-
-		Convey("shall convert all supported metric types", func() {
-			testCases := map[datapoint.MetricType]string{
-				datapoint.Gauge:   "gauge",
-				datapoint.Count:   "counter",
-				datapoint.Counter: "cumulative counter",
-			}
-			for metricType, expectedText := range testCases {
-				So(MetricTypeAsString(metricType), ShouldEqual, expectedText)
-			}
-		})
-
-		Convey("shall handle unknown type", func() {
-			So(MetricTypeAsString(datapoint.MetricType(1234)), ShouldEqual, "MetricType(1234)")
-
-		})
-	})
-
 }

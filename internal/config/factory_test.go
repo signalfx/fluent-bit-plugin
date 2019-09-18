@@ -89,7 +89,7 @@ func TestFactory(t *testing.T) {
 
 		Convey("shall panic when metric type is invalid", func() {
 			rawConfig["MetricType"] = "blah"
-			So(func() { NewFactory(valueGetter).GetConfig() }, ShouldPanicWith, "Invalid value for \"MetricType\": \"blah\". Supported values: \"gauge\", \"counter\", \"cumulative counter\"")
+			So(func() { NewFactory(valueGetter).GetConfig() }, ShouldPanicWith, "Invalid value for \"MetricType\": unrecognized metric type: \"blah\"")
 		})
 
 		Convey("shall panic when buffer size is not a number", func() {

@@ -32,7 +32,7 @@ func (c Config) String() string {
 	addLine("Ingest URL    = %s", c.IngestURL)
 	addLine("Token         = %s", obfuscatedToken(c.Token))
 	addLine("Metric Name   = %s", util.ValueOrDefault(c.MetricName, "<no default value>"))
-	addLine("Metric Type   = %s", util.MetricTypeAsString(c.MetricType))
+	addLine("Metric Type   = %s", c.MetricType)
 	addLine("Dimensions    = %s", strings.Join(c.Dimensions, ", "))
 	addLine("BufferSize    = %d", c.BufferSize)
 	addLine("ReportingRate = %s", c.ReportingRate)

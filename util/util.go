@@ -4,7 +4,6 @@ import (
 	"C"
 	"fmt"
 	"github.com/fluent/fluent-bit-go/output"
-	"github.com/signalfx/golib/datapoint"
 	"time"
 )
 
@@ -30,18 +29,5 @@ func FLBTimestampAsTime(ts interface{}) time.Time {
 		return time.Unix(int64(val), 0)
 	default:
 		return time.Now()
-	}
-}
-
-func MetricTypeAsString(mt datapoint.MetricType) string {
-	switch mt {
-	case datapoint.Count:
-		return "counter"
-	case datapoint.Counter:
-		return "cumulative counter"
-	case datapoint.Gauge:
-		return "gauge"
-	default:
-		return fmt.Sprintf("MetricType(%d)", int(mt))
 	}
 }

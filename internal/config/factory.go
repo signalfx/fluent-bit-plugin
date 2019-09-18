@@ -63,23 +63,17 @@ func (f *Factory) configValueAsToken(configKey string) string {
 
 func (f *Factory) configValueOrDefaultAsMetricType(configKey string, defaultValue string) datapoint.MetricType {
 	value := util.ValueOrDefault(f.configValue(configKey), defaultValue)
-	switch value {
-	case "gauge":
-		return datapoint.Gauge
-	case "counter":
-		return datapoint.Count
-	case "cumulative counter":
-		return datapoint.Counter
-	default:
-		f.logger.Panicf("Invalid value for %q: %q. Supported values: \"gauge\", \"counter\", \"cumulative counter\"", configKey, value)
-		return datapoint.Gauge // just to please compiler
+	var mt datapoint.MetricType
+	if err := mt.UnmarshalText([]byte(value)); err != nil {
+		f.logger.Panicf("Invalid value for %q: %s", configKey, err)
 	}
+	return mt
 }
 
 func (f *Factory) configValueOrDefaultAsDuration(configKey string, defaultValue string, minDuration time.Duration) time.Duration {
 	value := util.ValueOrDefault(f.configValue(configKey), defaultValue)
-	duration, e := time.ParseDuration(value)
-	if e != nil {
+	duration, err := time.ParseDuration(value)
+	if err != nil {
 		f.logger.Panicf("Invalid value for %q: cannot parse %q as duration", configKey, value)
 	}
 	if duration < minDuration {
@@ -90,8 +84,8 @@ func (f *Factory) configValueOrDefaultAsDuration(configKey string, defaultValue 
 
 func (f *Factory) configValueOrDefaultAsInt(configKey string, defaultValue string, minValue int) int {
 	value := util.ValueOrDefault(f.configValue(configKey), defaultValue)
-	i, e := strconv.Atoi(value)
-	if e != nil {
+	i, err := strconv.Atoi(value)
+	if err != nil {
 		f.logger.Panicf("Invalid value for %q: cannot parse %q as int", configKey, value)
 	}
 	if i < minValue {
@@ -103,8 +97,8 @@ func (f *Factory) configValueOrDefaultAsInt(configKey string, defaultValue strin
 func (f *Factory) configValueOrDefaultAsLogLevel(configKey string, defaultValue string) zapcore.Level {
 	value := util.ValueOrDefault(f.configValue(configKey), defaultValue)
 	var level zapcore.Level
-	e := level.UnmarshalText([]byte(value))
-	if e != nil {
+	err := level.UnmarshalText([]byte(value))
+	if err != nil {
 		f.logger.Panicf("Invalid value for %q: cannot parse %q as log level", configKey, value)
 	}
 	return level
