@@ -4,6 +4,13 @@ The SignalFx output plugin for [Fluent Bit](https://docs.fluentbit.io) sends log
 
 This enables you to filter your logs for specific phrases like "error", "exception", etc. and have the plugin report metrics whenever any of those phrases is present in a log stream.
 
+## Docker Images
+
+There are two Docker images available with the SignalFx output plugin for Fluent Bit:
+   * [quay.io/signalfx/fluent-bit](https://quay.io/repository/signalfx/fluent-bit?tab=tags) -- this image is based on the official [Fluent Bit image](https://hub.docker.com/r/fluent/fluent-bit/tags). This image contains Fluent Bit binaries and the SignalFx output plugin.
+
+  * [quay.io/signalfx/fluent-bit-aws](https://quay.io/repository/signalfx/fluent-bit-aws?tab=tags) -- this image is based on the the official [Amazon Fluent Bit image](https://hub.docker.com/r/amazon/aws-for-fluent-bit). This image contains Fluent Bit binaries, additional plugins for AWS Firehose and AWS CloudWatch provided by Amazon, and the SignalFx output plugin.
+
 ## Configuration Parameters
 
 | Key | Description | Default | Example |
@@ -47,10 +54,10 @@ For test purposes you may use the [gen-log.js](example/gen-log.js) node.js scrip
 
 You may find the following snippets useful when working with the SignalFx output plugin for Fluent Bit.
 
-`docker build . -t fluent-bit-signalfx -f ./build/package/Dockerfile` - builds new Docker image with the SignalFx plugin on top of the official [Fluent Bit image](https://hub.docker.com/r/fluent/fluent-bit/tags). 
+`make images TAG=x.y.z` - builds Docker images with the SignalFx plugin and tags them (refer to **Docker Images** for details).
 
-`docker build . -t fluent-bit-signalfx -f ./build/package/Dockerfile.aws` - builds new Docker image with the SignalFx plugin on top of the official [Amazon Fluent Bit image](https://hub.docker.com/r/fluent/fluent-bit/tags). 
+`make demo TAG=x.y.z INGEST_URL=https://ingest.signalfx.com TOKEN=<ACCESS TOKEN>` -- reports sample metric `com.example.app.requests` using default `ReportingRate`.
 
 `node example/gen-log.js 10 > example/fluent-bit-sample.log` -- generates sample log file with 10 log records using timestamps close to current time.
 
-`docker run -it --rm -v $(PWD)/example/fluent-bit-sample.log:/fluent-bit-sample.log -v $(PWD)/example/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf fluent-bit-signalfx` - runs the Docker container with [fluent-bit-sample.log](example/fluent-bit-sample.log) as an input and [fluent-bit.conf](example/fluent-bit.conf) as a config file.
+`docker run -it --rm -v $(PWD)/example/fluent-bit-sample.log:/fluent-bit-sample.log -v $(PWD)/example/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf quay.io/signalfx/fluent-bit:x.y.z` - runs the Docker container with [fluent-bit-sample.log](example/fluent-bit-sample.log) as an input and [fluent-bit.conf](example/fluent-bit.conf) as a config file.

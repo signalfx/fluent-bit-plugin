@@ -7,14 +7,11 @@ ENV GOOS=linux\
 
 COPY / /root/
 
-RUN go build \
-    -buildmode=c-shared \
-    -o /signalfx.so \
-    github.com/signalfx/signalfx-fluent-bit-plugin
+RUN make
 
 FROM amazon/aws-for-fluent-bit:1.2.2
 
-COPY --from=gobuilder /signalfx.so /fluent-bit/
+COPY --from=gobuilder /root/dist/signalfx.so /fluent-bit/
 
 EXPOSE 2020
 

@@ -23,11 +23,13 @@ type Config struct {
 	DebugLogEnabled bool
 }
 
+var gitVersion string // initialized by -ldflags build option
+
 func (c Config) String() string {
 	builder := strings.Builder{}
 	addLine := func(format string, a...interface{}) { builder.WriteString(fmt.Sprintf(format + "\n", a...)) }
 
-	addLine("SignalFx output plugin configuration:")
+	addLine("SignalFx output plugin (%s)", gitVersion)
 	addLine("Id            = %s", c.Id)
 	addLine("Ingest URL    = %s", c.IngestURL)
 	addLine("Token         = %s", obfuscatedToken(c.Token))

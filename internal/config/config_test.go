@@ -25,7 +25,7 @@ func TestConfig(t *testing.T) {
 		}
 
 		Convey("shall use stringer", func() {
-			So(config.String(), ShouldEqual, `SignalFx output plugin configuration:
+			So(config.String(), ShouldEqual, `SignalFx output plugin ()
 Id            = abc
 Ingest URL    = http://a.b.c
 Token         = 12...90
