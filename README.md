@@ -7,9 +7,9 @@ This enables you to filter your logs for specific phrases like "error", "excepti
 ## Docker Images
 
 There are two Docker images available with the SignalFx output plugin for Fluent Bit:
-   * [quay.io/signalfx/fluent-bit](https://quay.io/repository/signalfx/fluent-bit?tab=tags) -- this image is based on the official [Fluent Bit image](https://hub.docker.com/r/fluent/fluent-bit/tags). This image contains Fluent Bit binaries and the SignalFx output plugin.
+   * [quay.io/signalfx/fluent-bit](https://quay.io/repository/signalfx/fluent-bit?tab=tags) ([Dockerfile](build/package/Dockerfile)) -- this image is based on the official [Fluent Bit image](https://hub.docker.com/r/fluent/fluent-bit/tags). This image contains Fluent Bit binaries and the SignalFx output plugin.
 
-  * [quay.io/signalfx/fluent-bit-aws](https://quay.io/repository/signalfx/fluent-bit-aws?tab=tags) -- this image is based on the the official [Amazon Fluent Bit image](https://hub.docker.com/r/amazon/aws-for-fluent-bit). This image contains Fluent Bit binaries, additional plugins for AWS Firehose and AWS CloudWatch provided by Amazon, and the SignalFx output plugin.
+  * [quay.io/signalfx/fluent-bit-aws](https://quay.io/repository/signalfx/fluent-bit-aws?tab=tags) ([Dockerfile](build/package/Dockerfile.aws)) -- this image is based on the the official [Amazon Fluent Bit image](https://hub.docker.com/r/amazon/aws-for-fluent-bit). This image contains Fluent Bit binaries, additional plugins for AWS Firehose and AWS CloudWatch provided by Amazon, and the SignalFx output plugin.
 
 ## Configuration Parameters
 
