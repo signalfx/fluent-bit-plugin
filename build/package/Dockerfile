@@ -9,7 +9,7 @@ COPY / /root/
 
 RUN make
 
-FROM fluent/fluent-bit:1.2.2
+FROM fluent/fluent-bit:1.3.2
 
 COPY --from=gobuilder /root/dist/signalfx.so /fluent-bit/
 
