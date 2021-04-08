@@ -1,3 +1,11 @@
+# Deprecation Notice
+
+:warning: **Be advised this project is deprecated.** :warning:
+
+Use the official [Fluent Bit
+forwarder](https://docs.fluentbit.io/manual/installation/getting-started-with-fluent-bit) with the [Splunk
+output](https://docs.fluentbit.io/manual/pipeline/outputs/splunk).
+
 # SignalFx Output Plugin for Fluent Bit
 
 The SignalFx output plugin for [Fluent Bit](https://docs.fluentbit.io) sends log-based metrics to [SignalFx](https://www.SignalFx.com).
