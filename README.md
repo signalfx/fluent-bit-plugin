@@ -6,6 +6,8 @@ Use the official [Fluent Bit
 forwarder](https://docs.fluentbit.io/manual/installation/getting-started-with-fluent-bit) with the [Splunk
 output](https://docs.fluentbit.io/manual/pipeline/outputs/splunk).
 
+>ℹ️&nbsp;&nbsp;SignalFx was acquired by Splunk in October 2019. See [Splunk SignalFx](https://www.splunk.com/en_us/investor-relations/acquisitions/signalfx.html) for more information.
+
 # SignalFx Output Plugin for Fluent Bit
 
 The SignalFx output plugin for [Fluent Bit](https://docs.fluentbit.io) sends log-based metrics to [SignalFx](https://www.SignalFx.com).
